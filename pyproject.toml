@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "hierarchical-attention-network"
+version = "0.1.0"
+description = ""
+authors = ["Faisal Alatawi <fa.atawi@gmail.com>"]
+readme = "README.md"
+packages = [{include = "hierarchical_attention_network"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+nltk = "^3.8.1"
+scikit-learn = "^1.2.2"
+pandas = "^2.0.1"
+pylab-sdk = "^1.3.2"
+matplotlib = "^3.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

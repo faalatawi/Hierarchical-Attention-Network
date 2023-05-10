@@ -100,4 +100,3 @@ def collate_fn(batch):
             docs_tensor[doc_idx, sent_idx, :sent_length] = torch.LongTensor(sent)
 
     return docs_tensor, torch.LongTensor(labels), torch.LongTensor(doc_lengths), sent_lengths_tensor
-    

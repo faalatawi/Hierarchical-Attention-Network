@@ -74,7 +74,17 @@ if __name__ == '__main__':
     parser.add_argument("--dropout", type=float, default=0.1)
 
     config = parser.parse_args()
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # Adding mps support
+    device_name = "cpu"
+    if torch.cuda.is_available():
+        device_name = "cuda"
+    elif torch.backends.mps.is_available():
+        device_name = "mps"
+
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device(device_name)
+    print("Using device: {}".format(device))
     
     # Make necessary data directories at the very first run
     if not os.path.exists(os.path.dirname(config.vocab_path)):

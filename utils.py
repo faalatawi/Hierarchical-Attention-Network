@@ -5,6 +5,8 @@ from dataset import collate_fn
 from pylab import *
 from nltk.tokenize import word_tokenize, sent_tokenize
 
+import numpy as np
+
 import matplotlib
 import matplotlib.pyplot as plt
 
@@ -49,7 +51,7 @@ def get_pretrained_weights(glove_path, corpus_vocab, embed_dim, device):
             line = l.decode().split()
             if line[0] in corpus_set:
                 pretrained_vocab.add(line[0])
-                glove_pretrained[corpus_vocab.index(line[0])] = torch.from_numpy(np.array(line[1:]).astype(np.float))
+                glove_pretrained[corpus_vocab.index(line[0])] = torch.from_numpy(np.array(line[1:]).astype(np.float64)) # FIXME: float64 -> float32 
 
         # handling 'out of vocabulary' words
         var = float(torch.var(glove_pretrained))
@@ -84,7 +86,7 @@ def map_sentence_to_color(words, scores, sent_score):
 
 # NOTE MODIFICATION (FEATURE)
 def bar_chart(categories, scores, graph_title='Prediction', output_name='prediction_bar_chart.png'):
-    y_pos = arange(len(categories))
+    y_pos = np.arange(len(categories)) # FIXME: arange -> np.arange
 
     plt.bar(y_pos, scores, align='center', alpha=0.5)
     plt.xticks(y_pos, categories)
